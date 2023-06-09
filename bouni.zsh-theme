@@ -37,6 +37,7 @@ if [[ "${terminfo[colors]}" -ge 256 ]]; then
     oxide_red="%F{167}"
     oxide_limegreen="%F{112}"
     oxide_pink="%F{198}"
+    oxide_violet="%F{93}"
 else
     oxide_turquoise="%F{cyan}"
     oxide_orange="%F{yellow}"
@@ -81,5 +82,17 @@ FMT_DIR="%{$oxide_limegreen%}%~%{$oxide_reset_color%}"
 
 FMT_RETURN_VALUE="%(?.%{%F{white}%}.%{$oxide_red%})%(!.#.❯)%{$oxide_reset_color%}"
 
+export VIRTUAL_ENV_DISABLE_PROMPT=yes
+
+function virtenv_indicator {
+    if [[ -z $VIRTUAL_ENV ]] then
+        FMT_VENV=""
+    else
+        FMT_VENV="%{$oxide_violet%}$(basename "$(dirname "$VIRTUAL_ENV")")/$(basename "$VIRTUAL_ENV")%{$oxide_reset_color%} ❯ "
+    fi
+}
+
+add-zsh-hook precmd virtenv_indicator
+
 # Oxide prompt style.
-PROMPT=$'%{$USER_HOST%} ❯ %{$FMT_DIR%} ❯ ${vcs_info_msg_0_}\n%{$FMT_RETURN_VALUE%} '
+PROMPT=$'%{$USER_HOST%} ❯ %{$FMT_DIR%} ❯ %{$FMT_VENV%}${vcs_info_msg_0_}\n%{$FMT_RETURN_VALUE%} '

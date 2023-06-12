@@ -4,4 +4,4 @@ A custom ZSH theme based on the [oxide ZSH theme](https://github.com/dikiaap/dot
 
 ![](screenshot.png)
 
-Save bouni.zsh-theme to ~/.oh-my-zsh/themes/bouni.zsh-theme and set ZSH_THEME="bouni" in your .zshrc file
+Save **bouni.zsh-theme** to **~/.oh-my-zsh/themes/bouni.zsh-theme** and set `ZSH_THEME="bouni"` in your **.zshrc** file

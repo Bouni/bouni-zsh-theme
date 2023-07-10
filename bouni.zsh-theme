@@ -74,8 +74,13 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
 # Executed before each prompt.
 add-zsh-hook precmd vcs_info
 
-FMT_USER="%{$oxide_orange%}%n%{$oxide_reset_color%}"
-FMT_HOST="%{$oxide_pink%}%m%{$oxide_reset_color%}"
+if [[ $UID -eq 0 ]]; then
+    FMT_USER="🔥%{$oxide_red%}%n%{$oxide_reset_color%}"
+    FMT_HOST="%{$oxide_pink%}%m%{$oxide_reset_color%}🔥"
+else
+    FMT_USER="%{$oxide_orange%}%n%{$oxide_reset_color%}"
+    FMT_HOST="%{$oxide_pink%}%m%{$oxide_reset_color%}"
+fi
 USER_HOST="%{$FMT_USER%}%F{white}@%{$oxide_reset_color%}%{$FMT_HOST%}"
 
 FMT_DIR="%{$oxide_limegreen%}%~%{$oxide_reset_color%}"
